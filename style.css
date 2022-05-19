@@ -19,15 +19,19 @@ h1.header {
   padding: 0px;
   margin: 5px;
   font-family: optima;
-  font-weight: lighter;
+  font-weight: 500;
+  text-shadow: 2px 2px #d874ff9e;
 }
 h4.header {
   margin: 5px;
-  font-weight: lighter;
+  font-weight: 100;
+  font-family: optima;
   color: rgba(255, 255, 255, 0.653);
 }
 p.header {
-  margin: 5px
+  margin: 5px;
+  font-family: optima;
+  font-weight: lighter;
 }
 form#entry {
   background-color: rgba(166, 134, 240, 0.706);
@@ -50,19 +54,26 @@ h1#name {
   text-align: center;
   color: white;
   border-radius: 50%;
-  background-color: rgb(166, 134, 240);
   padding: 8px;
   margin: 5px;
   font-weight:500;
+  background-color: rgba(112, 45, 238, 0.589);
+  border-color: rgba(0, 213, 255, 0.639);
 }
 .buttons {
-  visibility: hidden; to toggle on search via script
+  visibility: hidden;
   text-align: center;
   margin: 0 auto;
   display: block;
+  padding: 5px;
 }
 input#formInput{
   font-style: italic;
   color:rgb(255, 255, 255);
   background-color: rgba(118, 237, 255, 0.503);
+}
+#mainImg{
+  visibility: hidden;
+  width: 50%;
+  height: auto;
 }
