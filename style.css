@@ -17,10 +17,12 @@ header {
 h1.header {
   padding: 0px;
   margin: 5px;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: optima;
+  font-weight: lighter;
 }
 h4.header {
-  margin: 5px
+  margin: 5px;
+  font-weight: lighter;
 }
 p.header {
   margin: 5px
@@ -33,6 +35,10 @@ form#entry {
   text-align: center;
   color:white;
   font-style: italic;
-  margin-top: 15px;
+  margin-top: 10px;
   
+}
+.buttons {
+  text-align: center;
+  visibility: hidden;
 }
