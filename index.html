@@ -14,18 +14,24 @@
     <p class="header">Type in a musical artist you're curious about and press GO!</p>
     <form id="entry">
       <label for="artist">Artist:</label>
-      <input type="text">
-      <input type="submit" value="GO!">
+      <input id="formInput" type="text" placeholder="˚ ༘✶ ⋆｡˚ ⁀➷˚ ༘✶ ⋆｡˚ ⁀➷">
+      <input class="button" type="submit" value="GO!">
     </form>
   </header>
   <h1 id="name"></h1>
-  <div class="buttons">
-    <span><button>Show Details</button></span>
-    <span><button>Show Discography</button></span>
-    <span><button>Show Music Videos</button></span>
-  </div>
-<!--use script to show 3 buttons on search return
+  <div class="buttons"><!--use script to show 3 buttons on search return
 hidden w/css and shown on search?-->
+    <span><button class="button" id="details">Show Details</button></span>
+    <span><button class="button" id="discog">Show Discography</button></span>
+    <span><button class="button" id="vids">Show Music Videos</button></span>
+  </div>
+  <div class="buttons">
+    <span><button class="button" id="clear">Clear All</button></span>
+    <span><button class="button" id="top">Top of Page</button></span>
+  </div>
+  <footer>
+
+  </footer>
   <script src="./script.js"></script>
 </body>
 </html>

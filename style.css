@@ -8,6 +8,7 @@ header {
   border-top: 10px;
   border-bottom: 10px;
   border-radius: 50%;
+  
 }
 .header {
   color: white;
@@ -23,12 +24,13 @@ h1.header {
 h4.header {
   margin: 5px;
   font-weight: lighter;
+  color: rgba(255, 255, 255, 0.653);
 }
 p.header {
   margin: 5px
 }
 form#entry {
-  background-color: rgb(166, 134, 240);
+  background-color: rgba(166, 134, 240, 0.706);
   width: 50vw;
   margin-left: 25vw;
   border-radius: 50%;
@@ -36,9 +38,31 @@ form#entry {
   color:white;
   font-style: italic;
   margin-top: 10px;
-  
+  font-size: larger;
+}
+h1#name {
+  text-align: center;
+  font-family: optima;
+  font-style: italic;
+  color:rgb(13, 95, 10)
+}
+.button {
+  text-align: center;
+  color: white;
+  border-radius: 50%;
+  background-color: rgb(166, 134, 240);
+  padding: 8px;
+  margin: 5px;
+  font-weight:500;
 }
 .buttons {
+  visibility: hidden; to toggle on search via script
   text-align: center;
-  visibility: hidden;
+  margin: 0 auto;
+  display: block;
+}
+input#formInput{
+  font-style: italic;
+  color:rgb(255, 255, 255);
+  background-color: rgba(118, 237, 255, 0.503);
 }
