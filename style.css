@@ -111,10 +111,21 @@ input#formInput{
   margin-bottom: 16px;
 }
 
-span.info {
+#artistDetails {
+  visibility: hidden;
+}
+
+#artistDiscog {
+  visibility: hidden;
+}
+
+#artistVids {
   visibility: hidden;
 }
 
 .mVids {
   background-color: rgb(200, 138, 255);
+  border: rgba(0, 213, 255, 0.639);
+  padding:4px;
+  margin:5px;
 }

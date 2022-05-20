@@ -37,8 +37,11 @@ function submitHandler(event){
   event.preventDefault()
   //console.log(inputForm.value)
   vidsArea.innerHTML = ""
+  vidsArea.style.visibility = "hidden"
   detailsArea.innerHTML = ""
+  detailsArea.style.visibility = "hidden"
   discogArea.innerHTML = ""
+  discogArea.style.visibility = "hidden"
   if (inputForm.value == ""){
     alert("Type in an artist to query first.")
   } else
@@ -54,7 +57,7 @@ function artistFetch(string){
   fetch(artistURL)
   .then((response) => response.json())
   .then((data) => {
-    console.log(data)
+    //console.log(data)
     renderArtist(data)
     buttonEnable()
 
@@ -117,19 +120,31 @@ function fetchDiscog(artistData){
 
 function renderDiscog(data){
   let fullDiscog = data.album
-  console.log(fullDiscog)
-  for (const album in fullDiscog){
-
+  console.log(fullDiscog.intYearReleased)
+  fullDiscog.sort((a, b) => parseFloat(a.intYearReleased) - parseFloat(b.intYearReleased))
+  //console.log("NEW", fullDiscog)
+  fullDiscog.forEach((album) => {
+    console.log(album.intYearReleased, album.strAlbum)
+  })
   }
 
-}
 
 function renderVids(data){
   //console.log(data)
   fetch("https://theaudiodb.com/api/v1/json/2/mvid.php?i=" + data.idArtist)
   .then(res => res.json())
-  .then(vidData => listVids(vidData))
+  .then(vidData => {
+    if(vidData.mvids == null){
+      alert("No music videos for this artist.")
+    } else {
+    listVids(vidData)
+    }
+  })
   function listVids(vidData){
+    if (vidsArea.style.visibility === "visible"){
+      vidsArea.innerHTML = ""
+      vidsArea.style.visibility = "hidden"
+    } else {
     vidData.mvids.forEach((vid) => {
       console.log(vid)
       let container = document.createElement("div")
@@ -146,6 +161,8 @@ function renderVids(data){
       trackDescription.innerText = vid.strDescriptionEN
       container.append(track, trackLink, trackDescription)
       vidsArea.append(container)
+      vidsArea.style.visibility = "visible"
     })
+    }
   }
 }
