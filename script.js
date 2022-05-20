@@ -24,6 +24,9 @@ const inputForm = document.getElementById("formInput")
 const artistTitle = document.getElementById("name")
 const mainImg = document.getElementById("mainImg")
 const buttons = document.getElementsByClassName("buttons")
+let artistData
+let discogData
+let mvData
 // add event listener to GO! button and preventDefault
 goBtn.addEventListener('click', submitHandler)
 
@@ -41,9 +44,10 @@ function artistFetch(string){
   fetch(artistURL)
   .then((response) => response.json())
   .then((data) => {
-    console.log(data)
+    //console.log(data)
     renderArtist(data)
-    buttonEnable(data)
+    buttonEnable()
+
   })
 }
 
@@ -56,6 +60,7 @@ function renderArtist(data){
       button.style.visibility = "hidden"
     }
   } else {
+    artistData = data.artists[0]
     artistTitle.innerText = data.artists[0].strArtist
     mainImg.src = data.artists[0].strArtistFanart
     mainImg.style.visibility = "visible"
@@ -66,26 +71,44 @@ function renderArtist(data){
   }
 }
 
-function buttonEnable(data){
+function buttonEnable(){
   for(const button of buttons){
-    button.addEventListener("click", (e) => {
+    button.addEventListener("click", activate)
+  }
+}
+
+function activate(e) {
       if (e.target.id === "details"){
-        console.log("DETAILS CLICKED")
-        
+        //console.log("DETAILS CLICKED")
+        renderDetails(artistData)
       } else if (e.target.id === "discog"){
-        console.log("DISCOG CLICKED")
-        
+        //console.log("DISCOG CLICKED")
+        fetchDiscog(artistData)        
       } else if (e.target.id === "vids"){
         console.log("VIDS CLICKED")
         
       } else if (e.target.id === "top"){
         console.log("TOP CLICKED")
-
+        window.scrollTo(0, 0)
       }
-    })
-  }
+    }
+
+function renderDetails(artistData){
+  console.log(artistData)
 }
 
-function displayData(data){
+function fetchDiscog(artistData){
+  let artistName = artistData.strArtist
+  fetch("https://theaudiodb.com/api/v1/json/2/discography.php?s=" + artistName)
+  .then(response => response.json())
+  .then((data) => renderDiscog(data))
+
+}
+
+function renderDiscog(data){
   console.log(data)
+}
+
+function renderVids(data){
+
 }
