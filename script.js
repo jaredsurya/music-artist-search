@@ -7,6 +7,7 @@
 // Return Discography for an Artist with Album names and year only
 // discography.php?s={Artist_Name}
 // Example - theaudiodb.com/api/v1/json/{APIKEY}/discography.php?s=coldplay
+// https://theaudiodb.com/api/v1/json/2/discography.php?s=
 
 // Return all the Music videos for a known TADB_Artist_ID
 // mvid.php?i=(artistid}
@@ -28,7 +29,7 @@ goBtn.addEventListener('click', submitHandler)
 
 function submitHandler(event){
   event.preventDefault()
-  console.log(inputForm.value)
+  //console.log(inputForm.value)
   artistFetch(inputForm.value)
   //buttonEnable(inputForm.value)
   inputForm.value = ""
@@ -42,6 +43,7 @@ function artistFetch(string){
   .then((data) => {
     console.log(data)
     renderArtist(data)
+    buttonEnable(data)
   })
 }
 
@@ -58,12 +60,32 @@ function renderArtist(data){
     mainImg.src = data.artists[0].strArtistFanart
     mainImg.style.visibility = "visible"
     for(const button of buttons){
-      console.log("HERE")
+      //console.log("HERE")
       button.style.visibility = 'visible'
     }
   }
 }
 
-function buttonEnable(input){
+function buttonEnable(data){
+  for(const button of buttons){
+    button.addEventListener("click", (e) => {
+      if (e.target.id === "details"){
+        console.log("DETAILS CLICKED")
+        
+      } else if (e.target.id === "discog"){
+        console.log("DISCOG CLICKED")
+        
+      } else if (e.target.id === "vids"){
+        console.log("VIDS CLICKED")
+        
+      } else if (e.target.id === "top"){
+        console.log("TOP CLICKED")
 
+      }
+    })
+  }
+}
+
+function displayData(data){
+  console.log(data)
 }

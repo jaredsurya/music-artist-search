@@ -1,3 +1,13 @@
+html {
+  height: 100%;
+  background-color: rgb(156, 163, 254);
+}
+
+body {
+  margin-left: 8%;
+  margin-right: 8%;
+}
+
 header {
   width:100%;
   height:30%;
@@ -8,35 +18,43 @@ header {
   border-top: 10px;
   border-bottom: 10px;
   border-radius: 50%;
-  
 }
+
 .header {
   color: white;
   text-align: center;
   padding: 5px;;
 }
+
 h1.header {
   padding: 0px;
   margin: 5px;
   font-family: optima;
   font-weight: 500;
   text-shadow: 2px 2px #d874ff9e;
+  font-size: 36pt;
 }
+
 h4.header {
   margin: 5px;
   font-weight: 100;
   font-family: optima;
-  color: rgba(255, 255, 255, 0.653);
+  color: rgba(255, 255, 255, 0.66);
+  font-size: small;
+  margin-bottom: 0px;
 }
+
 p.header {
-  margin: 5px;
+  margin: 8px;
   font-family: optima;
   font-weight: lighter;
+  font-size: medium;
 }
+
 form#entry {
   background-color: rgba(166, 134, 240, 0.706);
   width: 50vw;
-  margin-left: 25vw;
+  margin:auto;
   border-radius: 50%;
   text-align: center;
   color:white;
@@ -44,6 +62,7 @@ form#entry {
   margin-top: 10px;
   font-size: larger;
 }
+
 h1#name {
   text-align: center;
   font-family: optima;
@@ -54,6 +73,7 @@ h1#name {
   text-shadow: 2px 2px #d874ff9e;
   font-size: 42pt;
 }
+
 .button {
   text-align: center;
   color: white;
@@ -64,6 +84,7 @@ h1#name {
   background-color: rgba(112, 45, 238, 0.589);
   border-color: rgba(0, 213, 255, 0.639);
 }
+
 .buttons {
   visibility: hidden;
   text-align: center;
@@ -72,11 +93,13 @@ h1#name {
   padding: 5px;
   padding-top: 0px;
 }
+
 input#formInput{
   font-style: italic;
   color:rgb(255, 255, 255);
-  background-color: rgba(118, 237, 255, 0.503);
+  background-color: rgba(156, 240, 251, 0.632);
 }
+
 #mainImg{
   visibility: hidden;
   width: 50%;
@@ -86,4 +109,8 @@ input#formInput{
   display:block;
   border: 4px solid rgb(78, 20, 94);
   margin-bottom: 16px;
+}
+
+span.info {
+  visibility: hidden;
 }
