@@ -114,3 +114,7 @@ input#formInput{
 span.info {
   visibility: hidden;
 }
+
+.mVids {
+  background-color: rgb(200, 138, 255);
+}
