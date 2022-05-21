@@ -56,9 +56,22 @@ function hideAllInfo(){
   discogArea.style.visibility = "hidden"
 }
 
-function hideInfoConditional(){
-  if (ckbx.checked === false){
-    
+function hideOthers(btnID){
+  if (btnID === "details"){
+    vidsArea.innerHTML = ""
+    vidsArea.style.visibility = "hidden"
+    discogArea.innerHTML = ""
+    discogArea.style.visibility = "hidden"
+  } else if (btnID === "discog"){
+    detailsArea.innerHTML = ""
+    detailsArea.style.visibility = "hidden"
+    vidsArea.innerHTML = ""
+    vidsArea.style.visibility = "hidden"
+  } else if (btnID === "vids"){
+    discogArea.innerHTML = ""
+    discogArea.style.visibility = "hidden"
+    detailsArea.innerHTML = ""
+    detailsArea.style.visibility = "hidden"
   }
 }
 
@@ -104,15 +117,18 @@ function buttonEnable(){
 function activate(e) {
       if (e.target.id === "details"){
         //console.log("DETAILS CLICKED")
+        hideOthers(e.target.id)
         renderDetails(artistData)
       } else if (e.target.id === "discog"){
         //console.log("DISCOG CLICKED")
+        hideOthers(e.target.id)
         fetchDiscog(artistData)        
       } else if (e.target.id === "vids"){
         //fconsole.log("VIDS CLICKED")
+        hideOthers(e.target.id)
         renderVids(artistData)
       } else if (e.target.id === "top"){
-        console.log("TOP CLICKED")
+        //console.log("TOP CLICKED")
         window.scrollTo(0, 0)
       }
     }
@@ -216,13 +232,18 @@ function renderVids(data){
       track.className = "title"
       track.innerText = vid.strTrack
       track.href = vid.strMusicVid
-      let trackLink = document.createElement("a")
-      trackLink.className = "link"
-      trackLink.href = vid.strMusicVid
-      trackLink.innerText = "Click here to watch."
+      let vidPlayer = document.createElement("iframe")
+      vidPlayer.className = "vidPlayer"
+      let playerURL = vid.strMusicVid.slice(vid.strMusicVid.length - 11, vid.strMusicVid.length)
+      vidPlayer.src = "https://www.youtube.com/embed/" + playerURL
+      vidPlayer.autoplay = "false"
+      vidPlayer.frameborder = 0
+      vidPlayer.allow ="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      vidPlayer.setAttribute('allowfullscreen', '')
+      console.log(vidPlayer.src)
       let trackDescription = document.createElement("p")
       trackDescription.innerText = vid.strDescriptionEN
-      container.append(track, trackLink, trackDescription)
+      container.append(track, vidPlayer, trackDescription)
       vidsArea.append(container)
       vidsArea.style.visibility = "visible"
     })

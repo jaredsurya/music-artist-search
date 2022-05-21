@@ -161,3 +161,10 @@ input#formInput{
   border-radius: 10px;
   color: rgb(78, 20, 94);
 }
+
+.vidplayer {
+  width: 50%;
+  height:auto;
+}
+
+title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
