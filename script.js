@@ -36,19 +36,30 @@ goBtn.addEventListener('click', submitHandler)
 function submitHandler(event){
   event.preventDefault()
   //console.log(inputForm.value)
+  if (inputForm.value === ""){
+    alert("Type in an artist to query first.")
+    return
+  } else {
+  hideAllInfo()
+  artistFetch(inputForm.value)
+  //buttonEnable(inputForm.value)
+  inputForm.value = ""
+  }
+}
+
+function hideAllInfo(){
   vidsArea.innerHTML = ""
   vidsArea.style.visibility = "hidden"
   detailsArea.innerHTML = ""
   detailsArea.style.visibility = "hidden"
   discogArea.innerHTML = ""
   discogArea.style.visibility = "hidden"
-  if (inputForm.value == ""){
-    alert("Type in an artist to query first.")
-  } else
-  artistFetch(inputForm.value)
-  //buttonEnable(inputForm.value)
+}
 
-  inputForm.value = ""
+function hideInfoConditional(){
+  if (ckbx.checked === false){
+    
+  }
 }
 
 function artistFetch(string){
@@ -57,7 +68,7 @@ function artistFetch(string){
   fetch(artistURL)
   .then((response) => response.json())
   .then((data) => {
-    //console.log(data)
+    console.log(data)
     renderArtist(data)
     buttonEnable()
 
@@ -107,7 +118,36 @@ function activate(e) {
     }
 
 function renderDetails(artistData){
-  console.log(artistData)
+  if (detailsArea.style.visibility === "visible"){
+    detailsArea.innerHTML = ""
+    detailsArea.style.visibility = "hidden"
+  } else {
+    console.log(artistData)
+  let container = document.createElement('div')
+  container.id = "artistDetail"
+  let bullets = document.createElement('ul')
+  bullets.style.listStyle = "none"
+  let web = document.createElement('li')
+  web.innerHTML = `${artistData.strArtist} website: <a href="${artistData.strWebsite}">${artistData.strWebsite}</a>`
+  let originYr = document.createElement('li')
+  let originPlace = document.createElement('li')
+  originYr.innerText = `Origin year: ${artistData.intFormedYear}`
+  originPlace.innerText = `Origin place: ${artistData.strCountry}`
+  let label = document.createElement('li')
+  label.innerText = `Record Label: ${artistData.strLabel}`
+  let genre = document.createElement('li')
+  genre.innerText = `Genre: ${artistData.strGenre}`
+  let mood = document.createElement('li')
+  mood.innerText = `Mood: ${artistData.strMood}`
+  let bioTitle = document.createElement('p')
+  let bio = document.createElement('p')
+  bioTitle.innerText = `${artistData.strArtist} Biography:`
+  bio.innerText = artistData.strBiographyEN
+  bullets.append(web, originYr, originPlace, label, genre, mood)
+  container.append(bullets, bioTitle, bio)
+  detailsArea.append(container)
+  detailsArea.style.visibility = "visible"
+  }
 }
 
 function fetchDiscog(artistData){
@@ -115,18 +155,41 @@ function fetchDiscog(artistData){
   fetch("https://theaudiodb.com/api/v1/json/2/album.php?i=" + artistID)
   .then(response => response.json())
   .then((data) => renderDiscog(data))
-
+  
 }
 
 function renderDiscog(data){
   let fullDiscog = data.album
-  console.log(fullDiscog.intYearReleased)
+  //console.log(fullDiscog.intYearReleased)
+  if (discogArea.style.visibility === "visible"){
+    discogArea.innerHTML = ""
+    discogArea.style.visibility = "hidden"
+  } else {
   fullDiscog.sort((a, b) => parseFloat(a.intYearReleased) - parseFloat(b.intYearReleased))
   //console.log("NEW", fullDiscog)
   fullDiscog.forEach((album) => {
-    console.log(album.intYearReleased, album.strAlbum)
+    //console.log(album.intYearReleased, album.strAlbum)
+    let container = document.createElement("div")
+    container.className = "album"
+    let albumImg = document.createElement("img")
+    albumImg.className = "albumImg"
+    albumImg.src = album.strAlbumThumb
+    albumImg.alt = "No album image to show."
+    let albumName = document.createElement("h3")
+    albumName.innerText = album.strAlbum
+    let albumYr = document.createElement("p")
+    albumYr.innerText = "Year released: " + album.intYearReleased
+    let albumLabel = document.createElement("p")
+    if(album.strLabel === null){
+      albumLabel.innerText = "Record Label: NOT FOUND"
+    } else {
+    albumLabel.innerText = "Record Label: " + album.strLabel
+    }
+    container.append(albumImg, albumName, albumYr, albumLabel)
+    discogArea.append(container)
+    discogArea.style.visibility = "visible"
   })
-  }
+  }}
 
 
 function renderVids(data){
