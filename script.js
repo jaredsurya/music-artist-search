@@ -14,6 +14,7 @@
 // https://theaudiodb.com/api/v1/json/2/mvid.php?i=
 
 // BANDSINTOWN APP ID: 96950d65ce9ce5445e9876ef7a980447 (good for 3 months)
+document.addEventListener('DOMContentLoaded', (event) => {
 
 const goBtn = document.getElementById("goBtn")
 const detailsBtn = document.getElementById("details")
@@ -81,10 +82,9 @@ function artistFetch(string){
   fetch(artistURL)
   .then((response) => response.json())
   .then((data) => {
-    console.log(data)
+    //console.log(data)
     renderArtist(data)
     buttonEnable()
-
   })
 }
 
@@ -138,7 +138,10 @@ function renderDetails(artistData){
     detailsArea.innerHTML = ""
     detailsArea.style.visibility = "hidden"
   } else {
-    console.log(artistData)
+  // replaces falsy values like null or "" with NOT FOUND
+  for(const property in artistData){
+    artistData[property] ? artistData[property] : (artistData[property] = "NOT FOUND")
+  }
   let container = document.createElement('div')
   container.id = "artistDetail"
   let bullets = document.createElement('ul')
@@ -166,6 +169,7 @@ function renderDetails(artistData){
   }
 }
 
+
 function fetchDiscog(artistData){
   let artistID = artistData.idArtist
   fetch("https://theaudiodb.com/api/v1/json/2/album.php?i=" + artistID)
@@ -181,9 +185,14 @@ function renderDiscog(data){
     discogArea.innerHTML = ""
     discogArea.style.visibility = "hidden"
   } else {
+      // replaces falsy values like null or "" with NOT FOUND
+  //console.log(fullDiscog)
   fullDiscog.sort((a, b) => parseFloat(a.intYearReleased) - parseFloat(b.intYearReleased))
   //console.log("NEW", fullDiscog)
   fullDiscog.forEach((album) => {
+    for (const property in album) {
+    album[property] ? album[property] : (album[property] = "NOT FOUND")
+  }
     //console.log(album.intYearReleased, album.strAlbum)
     let container = document.createElement("div")
     container.className = "album"
@@ -194,7 +203,11 @@ function renderDiscog(data){
     let albumName = document.createElement("h3")
     albumName.innerText = album.strAlbum
     let albumYr = document.createElement("p")
-    albumYr.innerText = "Year released: " + album.intYearReleased
+    if (album.intYearReleased === "0"){
+      albumYr.innerText = "Year released: NOT FOUND"
+    } else {
+      albumYr.innerText = "Year released: " + album.intYearReleased
+    }
     let albumLabel = document.createElement("p")
     if(album.strLabel === null){
       albumLabel.innerText = "Record Label: NOT FOUND"
@@ -216,37 +229,40 @@ function renderVids(data){
     if(vidData.mvids == null){
       alert("No music videos for this artist.")
     } else {
-    listVids(vidData)
+      listVids(vidData)
     }
   })
-  function listVids(vidData){
-    if (vidsArea.style.visibility === "visible"){
-      vidsArea.innerHTML = ""
-      vidsArea.style.visibility = "hidden"
-    } else {
-    vidData.mvids.forEach((vid) => {
-      console.log(vid)
-      let container = document.createElement("div")
-      container.className = "mVids"
-      let track = document.createElement("h3")
-      track.className = "title"
-      track.innerText = vid.strTrack
-      track.href = vid.strMusicVid
-      let vidPlayer = document.createElement("iframe")
-      vidPlayer.className = "vidPlayer"
-      let playerURL = vid.strMusicVid.slice(vid.strMusicVid.length - 11, vid.strMusicVid.length)
-      vidPlayer.src = "https://www.youtube.com/embed/" + playerURL
-      vidPlayer.autoplay = "false"
-      vidPlayer.frameborder = 0
-      vidPlayer.allow ="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      vidPlayer.setAttribute('allowfullscreen', '')
-      console.log(vidPlayer.src)
-      let trackDescription = document.createElement("p")
-      trackDescription.innerText = vid.strDescriptionEN
-      container.append(track, vidPlayer, trackDescription)
-      vidsArea.append(container)
-      vidsArea.style.visibility = "visible"
-    })
+    
+    function listVids(vidData){
+      if (vidsArea.style.visibility === "visible"){
+        vidsArea.innerHTML = ""
+        vidsArea.style.visibility = "hidden"
+      } else {
+        vidData.mvids.forEach((vid) => {
+          ///console.log(vid)
+          let container = document.createElement("div")
+          container.className = "mVids"
+          let track = document.createElement("h3")
+          track.className = "title"
+          track.innerText = vid.strTrack
+          track.href = vid.strMusicVid
+          let vidPlayer = document.createElement("iframe")
+          vidPlayer.className = "vidPlayer"
+          let playerURL = vid.strMusicVid.slice(vid.strMusicVid.length - 11, vid.strMusicVid.length)
+          vidPlayer.src = "https://www.youtube.com/embed/" + playerURL
+          vidPlayer.autoplay = "false"
+          vidPlayer.frameborder = 0
+          vidPlayer.allow ="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          vidPlayer.setAttribute('allowfullscreen', '')
+          //console.log(vidPlayer.src)
+          let trackDescription = document.createElement("p")
+          trackDescription.innerText = vid.strDescriptionEN
+          container.append(track, vidPlayer, trackDescription)
+          vidsArea.append(container)
+          vidsArea.style.visibility = "visible"
+        })
+      }
     }
   }
-}
+  console.log(document.referrer)
+})
