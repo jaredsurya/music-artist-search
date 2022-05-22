@@ -1,19 +1,6 @@
-// FROM: https://www.theaudiodb.com/api_guide.php?ref=apilist.fun
+//To build app further, we could add in BANDSINTOWN tour date functionality:
+// BANDSINTOWN APP ID: 96950d65ce9ce5445e9876ef7a980447 (good for 3 months only)
 
-// Return Artist details from artist name
-// search.php?s={Artist name}
-// Example - theaudiodb.com/api/v1/json/2/search.php?s=coldplay
-
-// Return Discography for an Artist with Album names and year only
-// discography.php?s={Artist_Name}
-// Example - theaudiodb.com/api/v1/json/{APIKEY}/discography.php?s=coldplay
-// https://theaudiodb.com/api/v1/json/2/discography.php?s=
-
-// Return all the Music videos for a known TADB_Artist_ID
-// mvid.php?i=(artistid}
-// https://theaudiodb.com/api/v1/json/2/mvid.php?i=
-
-// BANDSINTOWN APP ID: 96950d65ce9ce5445e9876ef7a980447 (good for 3 months)
 document.addEventListener('DOMContentLoaded', (event) => {
 
 const goBtn = document.getElementById("goBtn")
@@ -31,7 +18,7 @@ let discogArea = document.getElementById("artistDiscog")
 let artistData
 let discogData
 let mvData
-// add event listener to GO! button and preventDefault
+
 goBtn.addEventListener('click', submitHandler)
 
 function submitHandler(event){
@@ -246,6 +233,12 @@ function renderVids(data){
           track.className = "title"
           track.innerText = vid.strTrack
           track.href = vid.strMusicVid
+          //
+          //YOUTUBE I-FRAME works when site is opened from localhost:8080, i.e. http-server NPM node add-on
+          //would not play when i-frame was accessed from a regular local ip address
+          // https://stackoverflow.com/questions/51969269/embedded-youtube-video-doesnt-work-on-local-server
+          // https://www.npmjs.com/package/http-server
+          //
           let vidPlayer = document.createElement("iframe")
           vidPlayer.className = "vidPlayer"
           let playerURL = vid.strMusicVid.slice(vid.strMusicVid.length - 11, vid.strMusicVid.length)
@@ -264,5 +257,4 @@ function renderVids(data){
       }
     }
   }
-  console.log(document.referrer)
 })
