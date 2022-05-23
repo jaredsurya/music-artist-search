@@ -122,7 +122,7 @@ function activate(e) {
         //console.log("TOP CLICKED")
         window.scrollTo(0, 0)
       } else if (e.target.id === "considerations"){
-        alert('Considerations:\n\nThis page was made with the help of Flatiron School and the "theaudiodb.com" web API.\n\nThanks for your help!')
+        alert('𝘾𝙤𝙣𝙨𝙞𝙙𝙚𝙧𝙖𝙩𝙞𝙤𝙣𝙨:\n\nThis page was made with the help of Flatiron School and the "theaudiodb.com" web API.\n\n𝑻𝒉𝒂𝒏𝒌𝒔 𝒇𝒐𝒓 𝒚𝒐𝒖𝒓 𝒉𝒆𝒍𝒑!')
       }
     }
 
@@ -155,6 +155,7 @@ function renderDetails(artistData){
   let bioTitle = document.createElement('p')
   let bio = document.createElement('p')
   bioTitle.innerHTML = `<strong>${artistData.strArtist} Biography:</strong>`
+  bioTitle.className = "title"
   bio.innerText = artistData.strBiographyEN
   bullets.append(web, originYr, originPlace, label, genre, mood)
   container.append(bullets, bioTitle, bio)
@@ -196,6 +197,7 @@ function renderDiscog(data){
     albumImg.alt = "No album image to show."
     let albumName = document.createElement("h3")
     albumName.innerText = album.strAlbum
+    albumName.className = "title"
     let albumYr = document.createElement("p")
     if (album.intYearReleased === "0"){
       albumYr.innerText = "Year released: NOT FOUND"
@@ -236,7 +238,7 @@ function renderVids(data){
           ///console.log(vid)
           let container = document.createElement("div")
           container.className = "mVids info"
-          let track = document.createElement("h3")
+          let track = document.createElement("h2")
           track.className = "title"
           track.innerText = vid.strTrack
           track.href = vid.strMusicVid
@@ -246,6 +248,8 @@ function renderVids(data){
           // https://stackoverflow.com/questions/51969269/embedded-youtube-video-doesnt-work-on-local-server
           // https://www.npmjs.com/package/http-server
           //
+          let vidContainer = document.createElement('div')
+          vidContainer.className = "vidContainer"
           let vidPlayer = document.createElement("iframe")
           vidPlayer.className = "vidPlayer"
           let playerURL = vid.strMusicVid.slice(vid.strMusicVid.length - 11, vid.strMusicVid.length)
@@ -254,10 +258,10 @@ function renderVids(data){
           vidPlayer.frameborder = 0
           vidPlayer.allow ="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           vidPlayer.setAttribute('allowfullscreen', '')
-          //console.log(vidPlayer.src)
+          vidContainer.append(vidPlayer)
           let trackDescription = document.createElement("p")
           trackDescription.innerText = vid.strDescriptionEN
-          container.append(track, vidPlayer, trackDescription)
+          container.append(track, vidContainer, trackDescription)
           vidsArea.append(container)
           vidsArea.style.visibility = "visible"
         })

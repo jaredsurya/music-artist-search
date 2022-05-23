@@ -90,6 +90,7 @@ h1#name {
 
 #goBtn {
   border: 1px white solid;
+  font-weight: bold;
 }
 
 #goBtn:hover {
@@ -123,11 +124,21 @@ h1#name {
   width: fit-content;
 }
 
-input#formInput{
-  font-style: italic;
-  color:rgb(255, 255, 255);
-  background-color: rgba(156, 240, 251, 0.632);
-  border: 2px white;
+#formInput{
+  color:rgb(116, 0, 194);
+  background-color: rgba(190, 237, 243, 0.651);
+  border: 2px white solid;
+  border-radius: 6px;
+  font-family: optima;
+}
+
+label{
+  text-shadow: rgb(93, 0, 255) 1px 0 10px;
+}
+
+::placeholder {
+  color: rgba(131, 139, 251, 0.75);
+  opacity: 1;
 }
 
 #mainImg{
@@ -219,4 +230,23 @@ ul {
 #artistDetail > p:first-of-type {
   font-size: large;
   margin-top: 33px;
+}
+
+.title {
+  text-shadow: rgba(255, 255, 255, 0.557) 1px 0 4px;
+  color: rgb(90, 20, 252);
+}
+
+.vidContainer {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+}
+
+.vidContainer iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
