@@ -121,6 +121,8 @@ function activate(e) {
       } else if (e.target.id === "top"){
         //console.log("TOP CLICKED")
         window.scrollTo(0, 0)
+      } else if (e.target.id === "considerations"){
+        alert('Considerations:\n\nThis page was made with the help of Flatiron School and the "theaudiodb.com" web API.\n\nThanks for your help!')
       }
     }
 

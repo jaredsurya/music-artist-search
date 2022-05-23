@@ -112,14 +112,14 @@ h1#name {
 .buttons {
   visibility: hidden;
   text-align: center;
-  margin: 12px auto;
+  margin: 14px auto;
   display: block;
   padding: 7px;
   background-color:rgba(166, 134, 240, 0.706);
   border: 2px rgba(120, 18, 230, 0.626);
   border-style: solid;
   border-radius: 52px;
-  margin-bottom: 20px;
+  margin-bottom: 36px;
   width: fit-content;
 }
 
@@ -140,6 +140,7 @@ input#formInput{
   border: 2px dotted rgb(78, 20, 94);
   margin-bottom: 35px;
   margin-top: 17px;
+  border-radius: 12px;
 }
 
 #artistDetails {
@@ -155,12 +156,8 @@ input#formInput{
 }
 
 .mVids {
-  background-color: rgb(200, 138, 255);
   border-radius: 10px;
-  padding:10px;
-  margin:10px;
   color: rgb(78, 20, 94);
-  border: 2px white solid;
 }
 
 .albumImg {
@@ -177,20 +174,19 @@ input#formInput{
   font-family: optima;
   border: 2px white solid;
   border-radius: 22px;
+  padding: 15px;
+  margin: 15px;
+  background-color: rgba(166, 134, 240, 0.706);
 }
 
 .album {
-  background-color: rgba(94, 151, 216, 0.781);
-  padding: 15px;
-  margin: 15px;
   color: rgb(78, 20, 94)
 }
 
 #artistDetail {
-  background-color: rgba(209, 179, 252, 0.668);
-  padding: 15px;
-  margin: 15px;
   color: rgb(78, 20, 94);
+  border: 2px white solid;
+  border-width: 2px; 
 }
 
 .vidplayer {
@@ -203,11 +199,6 @@ h3.title {
   font-size: 20pt;
 }
 
-#artistDetail {
-  border: 2px white solid;
-  border-width: 2px; 
-}
-
 .nav {
   padding: 17px;
   border: 1px white dotted;
@@ -218,4 +209,14 @@ h3.title {
 .nav:hover {
   font-style: italic;
   border: 1px white solid;
+}
+
+ul {
+  text-align:left;
+  padding-left: 162px;
+}
+
+#artistDetail > p:first-of-type {
+  font-size: large;
+  margin-top: 33px;
 }
