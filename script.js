@@ -87,7 +87,11 @@ function renderArtist(data){
     artistData = data.artists[0]
     artistTitle.innerText = data.artists[0].strArtist
     mainImg.src = data.artists[0].strArtistFanart
-    mainImg.style.visibility = "visible"
+    if(data.artists[0].strArtistFanart == null) {
+      mainImg.style.visibility = "hidden"
+    } else {
+      mainImg.style.visibility = "visible"
+    }
     for(const button of buttons){
       //console.log("HERE")
       button.style.visibility = 'visible'
@@ -131,23 +135,24 @@ function renderDetails(artistData){
   }
   let container = document.createElement('div')
   container.id = "artistDetail"
+  container.className = "info"
   let bullets = document.createElement('ul')
   bullets.style.listStyle = "none"
   let web = document.createElement('li')
-  web.innerHTML = `${artistData.strArtist} website: <a href="${artistData.strWebsite}">${artistData.strWebsite}</a>`
+  web.innerHTML = `<strong>${artistData.strArtist} website:</strong> <a href="${artistData.strWebsite}">${artistData.strWebsite ? artistData.strWebsite : "NO WEBSITE"}</a>`
   let originYr = document.createElement('li')
   let originPlace = document.createElement('li')
-  originYr.innerText = `Origin year: ${artistData.intFormedYear}`
-  originPlace.innerText = `Origin place: ${artistData.strCountry}`
+  originYr.innerHTML = `<strong>Origin year:</strong> ${artistData.intFormedYear}`
+  originPlace.innerHTML = `<strong>Origin place:</strong> ${artistData.strCountry}`
   let label = document.createElement('li')
-  label.innerText = `Record Label: ${artistData.strLabel}`
+  label.innerHTML = `<strong>Record Label:</strong> ${artistData.strLabel}`
   let genre = document.createElement('li')
-  genre.innerText = `Genre: ${artistData.strGenre}`
+  genre.innerHTML = `<strong>Genre:</strong> ${artistData.strGenre}`
   let mood = document.createElement('li')
-  mood.innerText = `Mood: ${artistData.strMood}`
+  mood.innerHTML = `<strong>Mood:</strong> ${artistData.strMood}`
   let bioTitle = document.createElement('p')
   let bio = document.createElement('p')
-  bioTitle.innerText = `${artistData.strArtist} Biography:`
+  bioTitle.innerHTML = `<strong>${artistData.strArtist} Biography:</strong>`
   bio.innerText = artistData.strBiographyEN
   bullets.append(web, originYr, originPlace, label, genre, mood)
   container.append(bullets, bioTitle, bio)
@@ -182,7 +187,7 @@ function renderDiscog(data){
   }
     //console.log(album.intYearReleased, album.strAlbum)
     let container = document.createElement("div")
-    container.className = "album"
+    container.className = "album info"
     let albumImg = document.createElement("img")
     albumImg.className = "albumImg"
     albumImg.src = album.strAlbumThumb
@@ -228,7 +233,7 @@ function renderVids(data){
         vidData.mvids.forEach((vid) => {
           ///console.log(vid)
           let container = document.createElement("div")
-          container.className = "mVids"
+          container.className = "mVids info"
           let track = document.createElement("h3")
           track.className = "title"
           track.innerText = vid.strTrack

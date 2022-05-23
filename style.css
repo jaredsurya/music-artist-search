@@ -6,6 +6,7 @@ html {
 body {
   margin-left: 6%;
   margin-right: 6%;
+  
 }
 
 header {
@@ -18,6 +19,7 @@ header {
   border-top: 10px;
   border-bottom: 10px;
   border-radius: 50%;
+  border: 3px white solid;
 }
 
 .header {
@@ -28,11 +30,12 @@ header {
 
 h1.header {
   padding: 0px;
-  margin: 5px;
+  margin: 3px;
   font-family: optima;
   font-weight: 500;
   text-shadow: 2px 2px #d874ff9e;
-  font-size: 36pt;
+  font-size: 40pt;
+  margin-bottom: 0px;
 }
 
 h4.header {
@@ -45,10 +48,11 @@ h4.header {
 }
 
 p.header {
-  margin: 8px;
+  margin-top: 2px;
   font-family: optima;
   font-weight: lighter;
   font-size: medium;
+  margin-bottom: 13px;
 }
 
 form#entry {
@@ -59,8 +63,18 @@ form#entry {
   text-align: center;
   color:white;
   font-style: italic;
-  margin-top: 10px;
+  font-family: optima;
+  margin-top: 12px;
   font-size: larger;
+  padding: 6px;
+  padding-left: 22px;
+  padding-right: 22px;
+  border: dotted white 2px;
+  border-style: groove;
+}
+
+#formInput:hover {
+  background-color: rgb(196, 219, 255);
 }
 
 h1#name {
@@ -69,9 +83,18 @@ h1#name {
   font-style: italic;
   color:rgb(78, 20, 94);
   margin-bottom: 12px;
-  margin-top: 12px;
+  margin-top: 15px;
   text-shadow: 2px 2px #d874ff9e;
-  font-size: 42pt;
+  font-size: 52pt;
+}
+
+#goBtn {
+  border: 1px white solid;
+}
+
+#goBtn:hover {
+  border: 1px dotted;
+  font-style: italic;
 }
 
 .button {
@@ -79,39 +102,44 @@ h1#name {
   color: white;
   border-radius: 50%;
   padding: 8px;
-  margin: 5px;
+  margin: 8px;
   font-weight:500;
+  font-family: optima;
   background-color: rgba(112, 45, 238, 0.589);
-  border-color: rgba(0, 213, 255, 0.639);
+  border: 3px, rgba(0, 213, 255, 0.639);
 }
 
 .buttons {
   visibility: hidden;
   text-align: center;
-  margin: 4px auto;
+  margin: 12px auto;
   display: block;
   padding: 7px;
   background-color:rgba(166, 134, 240, 0.706);
-  border: 3px rgba(112, 45, 238, 0.589);
-  border-style: dotted;
-  border-radius: 10px;
+  border: 2px rgba(120, 18, 230, 0.626);
+  border-style: solid;
+  border-radius: 52px;
+  margin-bottom: 20px;
+  width: fit-content;
 }
 
 input#formInput{
   font-style: italic;
   color:rgb(255, 255, 255);
   background-color: rgba(156, 240, 251, 0.632);
+  border: 2px white;
 }
 
 #mainImg{
   visibility: hidden;
-  width: 65%;
+  width: 76%;
   height: auto;
   margin-left: auto;
   margin-right: auto;
   display:block;
-  border: 3px solid rgb(78, 20, 94);
-  margin-bottom: 22px;
+  border: 2px dotted rgb(78, 20, 94);
+  margin-bottom: 35px;
+  margin-top: 17px;
 }
 
 #artistDetails {
@@ -132,6 +160,7 @@ input#formInput{
   padding:10px;
   margin:10px;
   color: rgb(78, 20, 94);
+  border: 2px white solid;
 }
 
 .albumImg {
@@ -140,31 +169,53 @@ input#formInput{
   margin-right: auto;
   width: 62%;
   margin-top: 10px;
+  border: 1px black solid;
 }
 
 .info {
   text-align: center;
+  font-family: optima;
+  border: 2px white solid;
+  border-radius: 22px;
 }
 
 .album {
-  background-color: rgba(107, 216, 255, 0.785);
+  background-color: rgba(94, 151, 216, 0.781);
   padding: 15px;
   margin: 15px;
-  border-radius: 10px;
   color: rgb(78, 20, 94)
 }
 
 #artistDetail {
-  background-color: rgba(252, 179, 190, 0.668);
+  background-color: rgba(209, 179, 252, 0.668);
   padding: 15px;
   margin: 15px;
-  border-radius: 10px;
   color: rgb(78, 20, 94);
 }
 
 .vidplayer {
-  width: 50%;
+  width: 95%;
   height:auto;
 }
 
-title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+h3.title {
+  font-family: optima;
+  font-size: 20pt;
+}
+
+#artistDetail {
+  border: 2px white solid;
+  border-width: 2px; 
+}
+
+.nav {
+  padding: 17px;
+  border: 1px white dotted;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.nav:hover {
+  font-style: italic;
+  border: 1px white solid;
+}
