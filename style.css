@@ -20,22 +20,34 @@ header {
   border-bottom: 10px;
   border-radius: 50%;
   border: 3px white solid;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .header {
   color: white;
   text-align: center;
-  padding: 5px;;
+  padding: 5px;
 }
 
 h1.header {
   padding: 0px;
-  margin: 3px;
+  margin: 13px;
+  margin-top: 3px;
   font-family: optima;
   font-weight: 500;
   text-shadow: 2px 2px #d874ff9e;
   font-size: 40pt;
-  margin-bottom: 0px;
+  margin-bottom: 3px;
+  cursor: pointer;
+  width:auto;
+  display: inline-block;
+  text-align: center;
+  position: relative;
+  left: 48%;
+  transform: translateX(-50%);
+  
 }
 
 h4.header {
@@ -52,7 +64,7 @@ p.header {
   font-family: optima;
   font-weight: lighter;
   font-size: medium;
-  margin-bottom: 13px;
+  margin-bottom: 19px;
 }
 
 #entry {
