@@ -12,6 +12,7 @@ const inputForm = document.getElementById("formInput")
 const artistTitle = document.getElementById("name")
 const mainImg = document.getElementById("mainImg")
 const buttons = document.getElementsByClassName("buttons")
+const topline = document.getElementById("topline")
 let vidsArea = document.getElementById("artistVids")
 let detailsArea = document.getElementById("artistDetails")
 let discogArea = document.getElementById("artistDiscog")
@@ -82,6 +83,7 @@ function renderArtist(data){
     mainImg.style.visibility = "hidden"
     for (const button of buttons){
       button.style.visibility = "hidden"
+      topline.style.visibility = "hidden"
     }
   } else {
     artistData = data.artists[0]
@@ -94,6 +96,7 @@ function renderArtist(data){
     }
     for(const button of buttons){
       //console.log("HERE")
+      topline.style.visibility = "visible"
       button.style.visibility = 'visible'
     }
   }
