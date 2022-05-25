@@ -102,6 +102,7 @@ h1#name {
 #goBtn {
   border: 1px white solid;
   font-weight: bold;
+  cursor: pointer;
 }
 
 #goBtn:hover {
@@ -199,7 +200,7 @@ label{
   border-radius: 22px;
   padding: 15px;
   margin: 15px;
-  background-color: rgba(166, 134, 240, 0.706);
+  background-color: rgba(185, 163, 235, 0.706);
 }
 
 .info:first-child {
@@ -231,6 +232,7 @@ h3.title {
   border: 1px white dotted;
   padding-top: 8px;
   padding-bottom: 8px;
+  cursor: pointer;
 }
 
 .nav:hover {

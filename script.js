@@ -4,34 +4,27 @@
 document.addEventListener('DOMContentLoaded', (event) => {
 
 const goBtn = document.getElementById("goBtn")
-const detailsBtn = document.getElementById("details")
-const discogBtn = document.getElementById("discog")
-const vidsBtn = document.getElementById("vids")
-const topBtn = document.getElementById("top")
 const inputForm = document.getElementById("formInput")
 const artistTitle = document.getElementById("name")
 const mainImg = document.getElementById("mainImg")
-const buttons = document.getElementsByClassName("buttons")
+const buttons = document.querySelectorAll(".buttons")
 const topline = document.getElementById("topline")
-let vidsArea = document.getElementById("artistVids")
-let detailsArea = document.getElementById("artistDetails")
-let discogArea = document.getElementById("artistDiscog")
+const vidsArea = document.getElementById("artistVids")
+const detailsArea = document.getElementById("artistDetails")
+const discogArea = document.getElementById("artistDiscog")
+const clearBtn = document.querySelectorAll(".clearPage")
 let artistData
-let discogData
-let mvData
 
 goBtn.addEventListener('click', submitHandler)
 
 function submitHandler(event){
   event.preventDefault()
-  //console.log(inputForm.value)
   if (inputForm.value === ""){
     alert("Type in an artist to query first.")
     return
   } else {
   hideAllInfo()
   artistFetch(inputForm.value)
-  //buttonEnable(inputForm.value)
   inputForm.value = ""
   }
 }
@@ -44,6 +37,20 @@ function hideAllInfo(){
   discogArea.innerHTML = ""
   discogArea.style.visibility = "hidden"
 }
+
+function clearAll(){
+  hideAllInfo()
+  mainImg.style.visibility = "hidden"
+  artistTitle.style.visibility = "hidden"
+  buttons.forEach(element => {
+    element.style.visibility = "hidden"
+  })
+  topline.style.visibility = "hidden"
+}
+
+clearBtn.forEach((btn) => {
+  btn.addEventListener('click', clearAll)
+})
 
 function hideOthers(btnID){
   if (btnID === "details"){
@@ -66,19 +73,16 @@ function hideOthers(btnID){
 
 function artistFetch(string){
   let artistURL = `https://theaudiodb.com/api/v1/json/2/search.php?s=` + string
-  //console.log(artistURL)
   fetch(artistURL)
   .then((response) => response.json())
   .then((data) => {
-    //console.log(data)
     renderArtist(data)
     buttonEnable()
-  })
+  }) 
 }
 
 function renderArtist(data){
   if(data.artists === null){
-    console.log("NO ARTIST")
     artistTitle.innerText = "Sorry, no artist found!"
     mainImg.style.visibility = "hidden"
     for (const button of buttons){
@@ -93,9 +97,9 @@ function renderArtist(data){
       mainImg.style.visibility = "hidden"
     } else {
       mainImg.style.visibility = "visible"
+      artistTitle.style.visibility = "visible"
     }
     for(const button of buttons){
-      //console.log("HERE")
       topline.style.visibility = "visible"
       button.style.visibility = 'visible'
     }
@@ -110,26 +114,22 @@ function buttonEnable(){
 
 function activate(e) {
       if (e.target.id === "details"){
-        //console.log("DETAILS CLICKED")
         hideOthers(e.target.id)
         renderDetails(artistData)
       } else if (e.target.id === "discog"){
-        //console.log("DISCOG CLICKED")
         hideOthers(e.target.id)
-        fetchDiscog(artistData)        
+        fetchDiscog(artistData.idArtist)        
       } else if (e.target.id === "vids"){
-        //fconsole.log("VIDS CLICKED")
         hideOthers(e.target.id)
         renderVids(artistData)
       } else if (e.target.id === "top"){
-        //console.log("TOP CLICKED")
         window.scrollTo(0, 0)
       } else if (e.target.id === "considerations"){
         alert('𝘾𝙤𝙣𝙨𝙞𝙙𝙚𝙧𝙖𝙩𝙞𝙤𝙣𝙨:\n\nThis page was made with the help of Flatiron School and the "theaudiodb.com" web API.\n\n𝑻𝒉𝒂𝒏𝒌𝒔 𝒇𝒐𝒓 𝒚𝒐𝒖𝒓 𝒉𝒆𝒍𝒑!')
       }
     }
 
-function renderDetails(artistData){
+function renderDetails({strArtist,strWebsite,intFormedYear,strCountry,strLabel,strGenre,strMood,strBiographyEN}){
   if (detailsArea.style.visibility === "visible"){
     detailsArea.innerHTML = ""
     detailsArea.style.visibility = "hidden"
@@ -144,22 +144,22 @@ function renderDetails(artistData){
   let bullets = document.createElement('ul')
   bullets.style.listStyle = "none"
   let web = document.createElement('li')
-  web.innerHTML = `<strong>${artistData.strArtist} website:</strong> <a href="${artistData.strWebsite}">${artistData.strWebsite ? artistData.strWebsite : "NO WEBSITE"}</a>`
+  web.innerHTML = `<strong>${strArtist} website:</strong> <a href="${strWebsite}">${strWebsite ? strWebsite : "NO WEBSITE"}</a>`
   let originYr = document.createElement('li')
   let originPlace = document.createElement('li')
-  originYr.innerHTML = `<strong>Origin year:</strong> ${artistData.intFormedYear}`
-  originPlace.innerHTML = `<strong>Origin place:</strong> ${artistData.strCountry}`
+  originYr.innerHTML = `<strong>Origin year:</strong> ${intFormedYear}`
+  originPlace.innerHTML = `<strong>Origin place:</strong> ${strCountry}`
   let label = document.createElement('li')
-  label.innerHTML = `<strong>Record Label:</strong> ${artistData.strLabel}`
+  label.innerHTML = `<strong>Record Label:</strong> ${strLabel}`
   let genre = document.createElement('li')
-  genre.innerHTML = `<strong>Genre:</strong> ${artistData.strGenre}`
+  genre.innerHTML = `<strong>Genre:</strong> ${strGenre}`
   let mood = document.createElement('li')
-  mood.innerHTML = `<strong>Mood:</strong> ${artistData.strMood}`
+  mood.innerHTML = `<strong>Mood:</strong> ${strMood}`
   let bioTitle = document.createElement('p')
   let bio = document.createElement('p')
-  bioTitle.innerHTML = `<strong>${artistData.strArtist} Biography:</strong>`
+  bioTitle.innerHTML = `<strong>${strArtist} Biography:</strong>`
   bioTitle.className = "title"
-  bio.innerText = artistData.strBiographyEN
+  bio.innerText = strBiographyEN
   bullets.append(web, originYr, originPlace, label, genre, mood)
   container.append(bullets, bioTitle, bio)
   detailsArea.append(container)
@@ -168,30 +168,24 @@ function renderDetails(artistData){
 }
 
 
-function fetchDiscog(artistData){
-  let artistID = artistData.idArtist
-  fetch("https://theaudiodb.com/api/v1/json/2/album.php?i=" + artistID)
+function fetchDiscog(id){
+  fetch("https://theaudiodb.com/api/v1/json/2/album.php?i=" + id)
   .then(response => response.json())
   .then((data) => renderDiscog(data))
-  
 }
 
 function renderDiscog(data){
   let fullDiscog = data.album
-  //console.log(fullDiscog.intYearReleased)
   if (discogArea.style.visibility === "visible"){
     discogArea.innerHTML = ""
     discogArea.style.visibility = "hidden"
   } else {
       // replaces falsy values like null or "" with NOT FOUND
-  //console.log(fullDiscog)
   fullDiscog.sort((a, b) => parseFloat(a.intYearReleased) - parseFloat(b.intYearReleased))
-  //console.log("NEW", fullDiscog)
   fullDiscog.forEach((album) => {
     for (const property in album) {
     album[property] ? album[property] : (album[property] = "NOT FOUND")
   }
-    //console.log(album.intYearReleased, album.strAlbum)
     let container = document.createElement("div")
     container.className = "album info"
     let albumImg = document.createElement("img")
@@ -221,7 +215,6 @@ function renderDiscog(data){
 
 
 function renderVids(data){
-  //console.log(data)
   fetch("https://theaudiodb.com/api/v1/json/2/mvid.php?i=" + data.idArtist)
   .then(res => res.json())
   .then(vidData => {
@@ -238,7 +231,6 @@ function renderVids(data){
         vidsArea.style.visibility = "hidden"
       } else {
         vidData.mvids.forEach((vid) => {
-          ///console.log(vid)
           let container = document.createElement("div")
           container.className = "mVids info"
           let track = document.createElement("h2")
