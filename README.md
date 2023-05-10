@@ -1,10 +1,14 @@
 # Music Artist Search
 
+**Our friends over at theaudiodb.com have changed the way their API works, so until further notice Music Artist Search is down.**
+
 This project was made with help from **Flatiron School**, using the API from **theaudiodb.com**.
 
 It is a single page app using HTML, CSS, and JavaScript, which communicates with the public theaudiodb.com API.
 
 The intention of this app is to make it easier to explore detailed info about our favorite music artists.
+
+To open this app, simply clone it into your local environment and open your code editing software. In your terminal, cd into the `MusicArtistSearch` directory and then open `index.html`. Currently, with the API restriction, the only artist we can search for is Coldplay.
 
 It's usage is simple. Just type in an artist you're curious about and press GO!
 
